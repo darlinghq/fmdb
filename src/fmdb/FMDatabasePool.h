@@ -30,7 +30,17 @@ NS_ASSUME_NONNULL_BEGIN
  in the main.m file.
  */
 
-@interface FMDatabasePool : NSObject
+@interface FMDatabasePool : NSObject {
+  dispatch_queue_t    _lockQueue;
+    
+  NSMutableArray      *_databaseInPool;
+  NSMutableArray      *_databaseOutPool;
+  NSString *_path;
+  id _delegate;
+  NSUInteger _maximumNumberOfDatabasesToCreate;
+  int _openFlags;
+  NSString *_vfsName;
+}
 
 /** Database path */
 

@@ -21,12 +21,7 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
     FMDBTransactionImmediate,
 };
 
-@interface FMDatabasePool () {
-    dispatch_queue_t    _lockQueue;
-    
-    NSMutableArray      *_databaseInPool;
-    NSMutableArray      *_databaseOutPool;
-}
+@interface FMDatabasePool ()
 
 - (void)pushDatabaseBackInPool:(FMDatabase*)db;
 - (FMDatabase*)db;
@@ -39,6 +34,7 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
 @synthesize delegate=_delegate;
 @synthesize maximumNumberOfDatabasesToCreate=_maximumNumberOfDatabasesToCreate;
 @synthesize openFlags=_openFlags;
+@synthesize vfsName=_vfsName;
 
 
 + (instancetype)databasePoolWithPath:(NSString *)aPath {

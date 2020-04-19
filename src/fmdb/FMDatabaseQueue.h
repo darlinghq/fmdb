@@ -61,7 +61,13 @@ NS_ASSUME_NONNULL_BEGIN
 
  */
 
-@interface FMDatabaseQueue : NSObject
+@interface FMDatabaseQueue : NSObject {
+    dispatch_queue_t    _queue;
+    FMDatabase          *_db;
+    NSString *_path;
+    int _openFlags;
+    NSString *_vfsName;
+}
 /** Path of database */
 
 @property (atomic, retain, nullable) NSString *path;

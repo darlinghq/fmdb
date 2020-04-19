@@ -77,7 +77,34 @@ typedef NS_ENUM(int, FMDBCheckpointMode) {
 #pragma clang diagnostic ignored "-Wobjc-interface-ivars"
 
 
-@interface FMDatabase : NSObject
+@interface FMDatabase : NSObject {
+    void*               _db;
+    BOOL                _isExecutingStatement;
+    NSTimeInterval      _startBusyRetryTime;
+    
+    NSMutableSet        *_openResultSets;
+    NSMutableSet        *_openFunctions;
+    
+    NSDateFormatter     *_dateFormat;
+    BOOL _hasOpenResultSets;
+
+    BOOL _shouldCacheStatements;
+    NSString *_databasePath;
+    NSURL *_databaseURL;
+    void *_sqliteHandle;
+    BOOL _logsErrors;
+    BOOL _crashOnErrors;
+    BOOL _isOpen;
+    NSMutableDictionary *_cachedStatements;
+    NSTimeInterval _maxBusyRetryTimeInterval;
+    BOOL _traceExecution;
+    BOOL _checkedOut;
+    BOOL _isInTransaction;
+    long _useCount;
+    NSString *_query;
+    void *_statement;
+    BOOL _inUse;
+}
 
 ///-----------------
 /// @name Properties

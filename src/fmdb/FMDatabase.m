@@ -8,16 +8,7 @@
 #import <sqlite3.h>
 #endif
 
-@interface FMDatabase () {
-    void*               _db;
-    BOOL                _isExecutingStatement;
-    NSTimeInterval      _startBusyRetryTime;
-    
-    NSMutableSet        *_openResultSets;
-    NSMutableSet        *_openFunctions;
-    
-    NSDateFormatter     *_dateFormat;
-}
+@interface FMDatabase ()
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,6 +20,15 @@ NS_ASSUME_NONNULL_END
 @end
 
 @implementation FMDatabase
+
+@synthesize crashOnErrors = _crashOnErrors;
+@synthesize traceExecution = _traceExecution;
+@synthesize isOpen = _isOpen;
+@synthesize databasePath = _databasePath;
+@synthesize isInTransaction = _isInTransaction;
+@synthesize checkedOut = _checkedOut;
+@synthesize logsErrors = _logsErrors;
+@synthesize cachedStatements = _cachedStatements;
 
 // Because these two properties have all of their accessor methods implemented,
 // we have to synthesize them to get the corresponding ivars. The rest of the
@@ -1653,6 +1653,11 @@ void FMDBBlockSQLiteCallBackFunction(sqlite3_context *context, int argc, sqlite3
 
 
 @implementation FMStatement
+
+@synthesize statement = _statement;
+@synthesize inUse = _inUse;
+@synthesize useCount = _useCount;
+@synthesize query = _query;
 
 #if ! __has_feature(objc_arc)
 - (void)finalize {

@@ -36,13 +36,11 @@ typedef NS_ENUM(NSInteger, FMDBTransaction) {
  */
 static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey;
 
-@interface FMDatabaseQueue () {
-    dispatch_queue_t    _queue;
-    FMDatabase          *_db;
-}
-@end
-
 @implementation FMDatabaseQueue
+
+@synthesize path=_path;
+@synthesize vfsName=_vfsName;
+@synthesize openFlags=_openFlags;
 
 + (instancetype)databaseQueueWithPath:(NSString *)aPath {
     FMDatabaseQueue *q = [[self alloc] initWithPath:aPath];
