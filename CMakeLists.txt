@@ -13,6 +13,8 @@ add_framework(FMDB
 	CURRENT_VERSION
 	PRIVATE
 	VERSION "A"
+	# macOS CoreFoundation lacks the NSError names, Foundation has them
+	LINK_FLAGS "-Wl,-no_implicit_dylibs"
 
 	SOURCES
 		${sources}
